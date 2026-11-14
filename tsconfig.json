@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "lib": ["ES2022", "DOM"],
+    "strict": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "types": [],
+    "paths": {
+      "expo-file-system": ["./tests/stubs/expo-file-system.ts"],
+      "expo-print": ["./tests/stubs/expo-print.ts"],
+      "expo-sharing": ["./tests/stubs/expo-sharing.ts"],
+      "react-native": ["./tests/stubs/react-native.ts"]
+    }
+  },
+  "include": ["src"]
+}

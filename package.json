@@ -1,0 +1,32 @@
+{
+  "name": "app-export-kit",
+  "version": "1.0.0",
+  "description": "Reusable data export for React Native / Expo apps (iOS, Android, web): Excel-safe CSV, a PDF report from a plain description, and save or share the file (share sheet on phones, download on web). No app words or colors: the app passes its look.",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "files": [
+    "src"
+  ],
+  "sideEffects": false,
+  "author": "Yuvaraj Salla",
+  "peerDependencies": {
+    "expo-file-system": ">=19",
+    "expo-print": ">=14",
+    "expo-sharing": ">=13",
+    "react-native": ">=0.74"
+  },
+  "peerDependenciesMeta": {
+    "expo-print": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "typescript": "^7.0.2",
+    "vite": "^8.3.5",
+    "vitest": "^5.1.0"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc -p ."
+  }
+}
