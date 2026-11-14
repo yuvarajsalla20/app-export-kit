@@ -7,7 +7,8 @@ export async function saveText(name: string, content: string, kind: FileKind): P
   document.body.appendChild(link);
   link.click();
   link.remove();
-  URL.revokeObjectURL(url);
+  // Safari can cancel a download whose address is taken back at once: let it start first.
+  setTimeout(() => URL.revokeObjectURL(url), 30_000);
 }
 
 /** Web has no printed file to share: PDFs go through the browser's own print dialog instead (see pdf.web.ts). */
