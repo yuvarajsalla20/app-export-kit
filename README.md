@@ -1,9 +1,39 @@
 # app-export-kit
 
-Data export for any React Native / Expo app (iOS, Android, web).
-Excel-safe CSV, a PDF report built from a plain description, and saving the file: the share sheet on phones (Save to Files, AirDrop, Mail …), a download or the print dialog on the web.
+Data export for any React Native or Expo app (iOS, Android and web): Excel-safe CSV, a PDF report built from a plain description, and saving the file. Phones get the share sheet (Save to Files, AirDrop, Mail); the web gets a download or the print dialog.
 
-It has no screens, no app words and no app colors. Your app decides what goes in a report, who may export it, and how it looks. It works for any kind of data: expenses, orders, attendance, scores.
+**Current version: 1.0.1** (tag `v1.0.1`)
+
+It has no screens, no app words and no app colors. Your app decides what goes in a report, who may export it, and how it looks. It works for any kind of data: expenses, orders, reminders, attendance, scores. To show a Data Export page with a lock per format, pair it with [app-settings-kit](https://github.com/yuvarajsalla20/app-settings-kit)'s `dataExport`.
+
+Part of the shared kits:
+[app-core-kit](https://github.com/yuvarajsalla20/app-core-kit) ·
+[app-auth-kit](https://github.com/yuvarajsalla20/app-auth-kit) ·
+[app-account-kit](https://github.com/yuvarajsalla20/app-account-kit) ·
+[app-settings-kit](https://github.com/yuvarajsalla20/app-settings-kit) ·
+[app-subscriptions-kit](https://github.com/yuvarajsalla20/app-subscriptions-kit) ·
+[app-payments-kit](https://github.com/yuvarajsalla20/app-payments-kit) ·
+**app-export-kit**
+
+## Install
+
+```jsonc
+// package.json
+"dependencies": {
+  "app-export-kit": "git+https://github.com/yuvarajsalla20/app-export-kit.git#<full SHA of v1.0.1>"
+},
+"kitVersions": {
+  "app-export-kit": "v1.0.1"
+}
+```
+
+Pin the full commit SHA of a release tag, and write the tag in `kitVersions`. Find a SHA with `git ls-remote https://github.com/yuvarajsalla20/app-export-kit refs/tags/v1.0.1`. Then add the Expo modules it uses:
+
+```bash
+npx expo install expo-file-system expo-sharing expo-print
+```
+
+**Peer dependencies:** `react-native` ≥ 0.74, `expo-file-system` ≥ 19 and `expo-sharing` ≥ 13 (CSV and PDF), `expo-print` ≥ 14 (PDF on phones; optional if you only export CSV). PDF on a phone needs a development build or TestFlight build, not Expo Go.
 
 ## What you get
 
@@ -14,15 +44,11 @@ It has no screens, no app words and no app colors. Your app decides what goes in
 | `toCsv(rows, { bom })` | The CSV text only: quoting, and formulas (`=`, `+`, `-`, `@`) turned into plain text so a cell can never run in a spreadsheet. Plain numbers stay numbers |
 | `reportHtml(report, look)` | The report as one HTML page. Pure, so an app can test its own report without a phone |
 | `exportFileName(app, stem, ext)` | File-safe names: `myapp-november-2026.pdf` |
-| `saveText(name, text, kind)` | Any text file through the same share sheet or download |
+| `saveText(name, text, kind)` | Any text file through the same share sheet or download. `kind` is `CSV` or `PDF` |
+| `escapeHtml`, `DEFAULT_REPORT_LOOK`, `PAGE_POINTS`, `CSV_BOM` | The pieces behind them, for your own files and tests |
+| `KIT_NAME`, `KIT_VERSION` | The kit's name and version |
 
 ## Quick start
-
-```bash
-npm install "app-export-kit@git+https://github.com/yuvarajsalla20/app-export-kit.git#v1.0.0"
-npx expo install expo-file-system expo-sharing expo-print
-```
-
 
 ```ts
 import { exportCsv, exportFileName, exportPdf, type Report } from 'app-export-kit';
@@ -87,14 +113,6 @@ Pass only what differs; the rest is a print-friendly default (dark text on white
 
 Every word in the report is escaped. Colors must be plain colors (`#hex`, a name or `rgb()`), the font a plain font list, and the logo an `https:` address or a `data:image/…;base64` URI; anything else falls back to the default, so app data can never change the page.
 
-## Install
-
-Peer dependencies: `expo-file-system` and `expo-sharing` (CSV), plus `expo-print` for PDF on phones (optional if you only export CSV). Pin the kit in your app by tag or commit SHA:
-
-```json
-"app-export-kit": "git+https://github.com/yuvarajsalla20/app-export-kit.git#v1.0.0"
-```
-
 ## Platforms
 
 | | CSV | PDF |
@@ -118,22 +136,21 @@ src/
 tests/            CSV safety, file names, report HTML and escaping, the phone paths with stand-ins in tests/stubs
 ```
 
-## Versions
-
-Every release is tagged in git (`v1.0.0`). Changes stay backward compatible within a major version: new options default to today's behavior.
-
-### 1.0.1
-
-Web downloads keep their address for 30 seconds before letting it go, so Safari does not cancel them. MIT LICENSE file added, like the other kits.
-
-### 1.0.0
-
-First release: CSV, PDF report, share or download, file names.
-
-## Testing
+## Development
 
 ```bash
 npm install
 npm test            # CSV safety, file names, report HTML and escaping, the phone paths with stand-ins
 npm run typecheck
 ```
+
+To release: bump `version` in `package.json` and `KIT_VERSION` in `src/kit.ts`, add a note to [CHANGELOG.md](CHANGELOG.md), merge, then tag the merged commit. Changes stay backward compatible within a major version: new options default to today's behavior.
+
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md).
+
+## License
+
+MIT
+
