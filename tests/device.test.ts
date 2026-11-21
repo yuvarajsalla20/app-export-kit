@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { CSV_BOM, exportCsv, exportPdf } from '../src';
+import { CSV_BOM, exportCsv } from '../src';
+import { exportPdf } from 'app-export-kit/pdf';
 import { failNext, log } from './stubs/expo-file-system';
 import { printed } from './stubs/expo-print';
 import { shared } from './stubs/expo-sharing';
