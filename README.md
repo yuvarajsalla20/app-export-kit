@@ -133,7 +133,7 @@ src/
   save.ts         phones: write, share, tidy up      save.web.ts   web: download
   pdf.ts          phones: expo-print, then share     pdf.web.ts    web: print dialog
   csvExport.ts    exportCsv
-tests/            CSV safety, file names, report HTML and escaping, the phone paths with stand-ins in tests/stubs
+tests/            CSV safety, file names, report HTML and escaping, the phone paths with stand-ins in tests/stubs, the web download and print dialog
 ```
 
 ## Development
