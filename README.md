@@ -2,7 +2,7 @@
 
 Data export for any React Native or Expo app (iOS, Android and web): Excel-safe CSV, a PDF report built from a plain description, and saving the file. Phones get the share sheet (Save to Files, AirDrop, Mail); the web gets a download or the print dialog.
 
-**Current version: 1.0.1** (tag `v1.0.1`)
+**Current version: 2.0.0** (tag `v2.0.0`)
 
 It has no screens, no app words and no app colors. Your app decides what goes in a report, who may export it, and how it looks. It works for any kind of data: expenses, orders, reminders, attendance, scores. To show a Data Export page with a lock per format, pair it with [app-settings-kit](https://github.com/yuvarajsalla20/app-settings-kit)'s `dataExport`.
 
@@ -13,21 +13,27 @@ Part of the shared kits:
 [app-settings-kit](https://github.com/yuvarajsalla20/app-settings-kit) ·
 [app-subscriptions-kit](https://github.com/yuvarajsalla20/app-subscriptions-kit) ·
 [app-payments-kit](https://github.com/yuvarajsalla20/app-payments-kit) ·
-**app-export-kit**
+**app-export-kit** ·
+[app-guard-kit](https://github.com/yuvarajsalla20/app-guard-kit) ·
+[app-theme-kit](https://github.com/yuvarajsalla20/app-theme-kit) ·
+[app-invite-kit](https://github.com/yuvarajsalla20/app-invite-kit) ·
+[app-goldrates-api-kit](https://github.com/yuvarajsalla20/app-goldrates-api-kit)
+
+Tools that work alongside them: [code-review-kit](https://github.com/yuvarajsalla20/code-review-kit) (reviews) and app-insights-kit (store numbers, private).
 
 ## Install
 
 ```jsonc
 // package.json
 "dependencies": {
-  "app-export-kit": "git+https://github.com/yuvarajsalla20/app-export-kit.git#<full SHA of v1.0.1>"
+  "app-export-kit": "git+https://github.com/yuvarajsalla20/app-export-kit.git#<full SHA of v2.0.0>"
 },
 "kitVersions": {
-  "app-export-kit": "v1.0.1"
+  "app-export-kit": "v2.0.0"
 }
 ```
 
-Pin the full commit SHA of a release tag, and write the tag in `kitVersions`. Find a SHA with `git ls-remote https://github.com/yuvarajsalla20/app-export-kit refs/tags/v1.0.1`. Then add the Expo modules it uses:
+Pin the full commit SHA of a release tag, and write the tag in `kitVersions`. Find a SHA with `git ls-remote https://github.com/yuvarajsalla20/app-export-kit refs/tags/v2.0.0`. Then add the Expo modules it uses:
 
 ```bash
 npx expo install expo-file-system expo-sharing expo-print
@@ -151,6 +157,10 @@ To release: bump `version` in `package.json` and `KIT_VERSION` in `src/kit.ts`, 
 ## Changelog
 
 See [CHANGELOG.md](CHANGELOG.md).
+
+## Writing rule
+
+Every word this kit shows, and every line of its documentation, follows the shared [Writing rule](https://github.com/yuvarajsalla20/app-settings-kit#writing-rule-every-word-is-professional): Title Case for titles, rows and buttons; calm, complete sentences for captions and messages; "e.g.," for examples; no chatty fragments, slang or exclamation marks. Apps do not override these words; a change is made in the kit so that every app receives it.
 
 ## License
 
