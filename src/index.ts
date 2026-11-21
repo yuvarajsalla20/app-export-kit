@@ -5,4 +5,3 @@ export { DEFAULT_REPORT_LOOK, escapeHtml, reportHtml, type Report, type ReportFi
 export { CSV, PAGE_POINTS, PDF, type FileKind } from './types';
 export { saveText } from './save';
 export { exportCsv } from './csvExport';
-export { exportPdf } from './pdf';

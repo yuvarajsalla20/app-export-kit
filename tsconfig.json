@@ -18,5 +18,5 @@
       "react-native": ["./tests/stubs/react-native.ts"]
     }
   },
-  "include": ["src"]
+  "include": ["src", "pdf.ts"]
 }

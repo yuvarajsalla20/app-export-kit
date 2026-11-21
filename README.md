@@ -33,14 +33,14 @@ Pin the full commit SHA of a release tag, and write the tag in `kitVersions`. Fi
 npx expo install expo-file-system expo-sharing expo-print
 ```
 
-**Peer dependencies:** `react-native` ≥ 0.74, `expo-file-system` ≥ 19 and `expo-sharing` ≥ 13 (CSV and PDF), `expo-print` ≥ 14 (PDF on phones; optional if you only export CSV). PDF on a phone needs a development build or TestFlight build, not Expo Go.
+**Peer dependencies:** `react-native` ≥ 0.74, `expo-file-system` ≥ 19 and `expo-sharing` ≥ 13 (CSV and PDF), `expo-print` ≥ 14 (PDF on phones only). An app that only exports CSV never loads `expo-print`, because PDF lives in its own entry, `app-export-kit/pdf`. PDF on a phone needs a development build or TestFlight build, not Expo Go.
 
 ## What you get
 
 | Piece | What it does |
 |---|---|
 | `exportCsv(name, rows)` | Rows of text as a CSV file that opens safely in Excel, Numbers and Google Sheets, then shared or downloaded |
-| `exportPdf(name, report, look)` | The report as a PDF: printed on the phone with `expo-print` and shared; on the web the browser's print dialog ("Save as PDF") |
+| `exportPdf(name, report, look)` from `app-export-kit/pdf` | The report as a PDF: printed on the phone with `expo-print` and shared; on the web the browser's print dialog ("Save as PDF") |
 | `toCsv(rows, { bom })` | The CSV text only: quoting, and formulas (`=`, `+`, `-`, `@`) turned into plain text so a cell can never run in a spreadsheet. Plain numbers stay numbers |
 | `reportHtml(report, look)` | The report as one HTML page. Pure, so an app can test its own report without a phone |
 | `exportFileName(app, stem, ext)` | File-safe names: `myapp-november-2026.pdf` |
@@ -51,7 +51,8 @@ npx expo install expo-file-system expo-sharing expo-print
 ## Quick start
 
 ```ts
-import { exportCsv, exportFileName, exportPdf, type Report } from 'app-export-kit';
+import { exportCsv, exportFileName, type Report } from 'app-export-kit';
+import { exportPdf } from 'app-export-kit/pdf'; // only apps that make PDFs
 
 await exportCsv(exportFileName('MyApp', 'all-orders', 'csv'), [
   ['Date', 'Item', 'Amount'],
@@ -124,7 +125,7 @@ Every word in the report is escaped. Colors must be plain colors (`#hex`, a name
 
 ```
 src/
-  index.ts        the one entry
+  index.ts        the main entry (CSV, report, file names; no expo-print)
   kit.ts          KIT_NAME, KIT_VERSION (a test keeps it equal to package.json)
   csv.ts          toCsv, CSV_BOM
   fileName.ts     exportFileName
@@ -133,6 +134,7 @@ src/
   save.ts         phones: write, share, tidy up      save.web.ts   web: download
   pdf.ts          phones: expo-print, then share     pdf.web.ts    web: print dialog
   csvExport.ts    exportCsv
+pdf.ts            the PDF entry, app-export-kit/pdf
 tests/            CSV safety, file names, report HTML and escaping, the phone paths with stand-ins in tests/stubs, the web download and print dialog
 ```
 
