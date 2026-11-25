@@ -2,6 +2,10 @@
 
 Release notes for app-export-kit, newest first. Each version is tagged in git (`v1.0.1`).
 
+## 2.1.0
+
+Nothing breaks. `toCsv`, `CSV_BOM` and `escapeHtml` now come from app-core-kit's single copy (`app-core-kit/shared`), so the kits no longer carry copies that drift apart. They are still exported here, unchanged in use. New peer dependency: app-core-kit 1.11.0 or later, which every app on the kits already installs.
+
 ## 2.0.0
 
 PDF moves to its own entry. `exportPdf` now comes from `app-export-kit/pdf`, not from `app-export-kit`. An app that only exports CSV no longer loads `expo-print` at all, so it does not need the native module, a new native build, or a test stand-in for it.

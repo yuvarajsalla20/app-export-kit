@@ -2,7 +2,7 @@
 
 Data export for any React Native or Expo app (iOS, Android and web): Excel-safe CSV, a PDF report built from a plain description, and saving the file. Phones get the share sheet (Save to Files, AirDrop, Mail); the web gets a download or the print dialog.
 
-**Current version: 2.0.0** (tag `v2.0.0`)
+**Current version: 2.1.0** (tag `v2.1.0`)
 
 It has no screens, no app words and no app colors. Your app decides what goes in a report, who may export it, and how it looks. It works for any kind of data: expenses, orders, reminders, attendance, scores. To show a Data Export page with a lock per format, pair it with [app-settings-kit](https://github.com/yuvarajsalla20/app-settings-kit)'s `dataExport`.
 
@@ -26,20 +26,20 @@ Tools that work alongside them: [code-review-kit](https://github.com/yuvarajsall
 ```jsonc
 // package.json
 "dependencies": {
-  "app-export-kit": "git+https://github.com/yuvarajsalla20/app-export-kit.git#<full SHA of v2.0.0>"
+  "app-export-kit": "git+https://github.com/yuvarajsalla20/app-export-kit.git#<full SHA of v2.1.0>"
 },
 "kitVersions": {
-  "app-export-kit": "v2.0.0"
+  "app-export-kit": "v2.1.0"
 }
 ```
 
-Pin the full commit SHA of a release tag, and write the tag in `kitVersions`. Find a SHA with `git ls-remote https://github.com/yuvarajsalla20/app-export-kit refs/tags/v2.0.0`. Then add the Expo modules it uses:
+Pin the full commit SHA of a release tag, and write the tag in `kitVersions`. Find a SHA with `git ls-remote https://github.com/yuvarajsalla20/app-export-kit refs/tags/v2.1.0`. Then add the Expo modules it uses:
 
 ```bash
 npx expo install expo-file-system expo-sharing expo-print
 ```
 
-**Peer dependencies:** `react-native` ≥ 0.74, `expo-file-system` ≥ 19 and `expo-sharing` ≥ 13 (CSV and PDF), `expo-print` ≥ 14 (PDF on phones only). An app that only exports CSV never loads `expo-print`, because PDF lives in its own entry, `app-export-kit/pdf`. PDF on a phone needs a development build or TestFlight build, not Expo Go.
+**Peer dependencies:** `react-native` ≥ 0.74, `app-core-kit` ≥ 1.11.0 (2.1.0: the shared CSV and HTML helpers), `expo-file-system` ≥ 19 and `expo-sharing` ≥ 13 (CSV and PDF), `expo-print` ≥ 14 (PDF on phones only). An app that only exports CSV never loads `expo-print`, because PDF lives in its own entry, `app-export-kit/pdf`. PDF on a phone needs a development build or TestFlight build, not Expo Go.
 
 ## What you get
 

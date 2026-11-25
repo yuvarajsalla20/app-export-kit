@@ -1,3 +1,4 @@
+import { escapeHtml } from 'app-core-kit/shared';
 /** One label and value in the summary at the top, such as "Total spent" and "$1,240.00". */
 export interface ReportFigure {
   label: string;
@@ -54,9 +55,8 @@ export const DEFAULT_REPORT_LOOK: ReportLook = {
   page: 'A4',
 };
 
-const ESC: Record<string, string> = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
-/** Text made safe to put inside HTML. */
-export const escapeHtml = (text: string): string => text.replace(/[&<>"']/g, (ch) => ESC[ch]!);
+/** Text made safe to put inside HTML (2.1.0: app-core-kit's single copy). */
+export { escapeHtml };
 
 /** Only a plain color can reach the style sheet. Anything else falls back, so a value can never break out of CSS. */
 const color = (value: string, fallback: string) => (/^(#[0-9a-f]{3,8}|[a-z]+|rgba?\([\d\s.,%]+\))$/i.test(value) ? value : fallback);
